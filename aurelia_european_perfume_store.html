@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURELIA — European Perfume House</title>
+<style>
+:root{
+  --ink:#171411; --muted:#756d65; --cream:#f7f3ed; --paper:#fffdfa;
+  --line:#e7dfd5; --gold:#b28a52; --dark:#211d19;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:var(--paper)}
+button{font:inherit;cursor:pointer}
+.topbar{background:var(--dark);color:#fff;text-align:center;padding:9px;font:11px Arial,sans-serif;letter-spacing:1.7px}
+header{position:sticky;top:0;z-index:20;background:rgba(255,253,250,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1240px;margin:auto;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.logo{font-size:24px;letter-spacing:5px}
+.navlinks{display:flex;gap:30px;font:12px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase}
+.navlinks a{color:var(--ink);text-decoration:none}
+.icons{display:flex;gap:16px}
+.iconbtn{background:none;border:0;font-size:18px;position:relative}
+.badge{position:absolute;right:-6px;top:-7px;background:var(--ink);color:white;border-radius:50%;font:9px Arial;padding:3px 5px}
+.hero{min-height:650px;background:
+linear-gradient(90deg,rgba(20,16,13,.76),rgba(20,16,13,.18)),
+url("https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1800&q=85") center/cover;
+display:flex;align-items:center;color:white}
+.hero-inner{max-width:1240px;width:100%;margin:auto;padding:70px 28px}
+.eyebrow{font:11px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(48px,7vw,88px);font-weight:400;line-height:.95;max-width:680px}
+.hero p{font:16px/1.7 Arial,sans-serif;max-width:520px;margin:26px 0 32px;color:#f3eee8}
+.cta{display:inline-block;border:1px solid white;color:white;text-decoration:none;padding:15px 25px;font:11px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
+.section{max-width:1240px;margin:auto;padding:90px 28px}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:35px}
+.section h2{font-size:42px;font-weight:400}
+.section-head a{font:11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink)}
+.filters{display:flex;gap:10px;margin-bottom:25px;overflow:auto}
+.filter{border:1px solid var(--line);background:transparent;padding:10px 16px;font:10px Arial,sans-serif;letter-spacing:1.2px;text-transform:uppercase;white-space:nowrap}
+.filter.active{background:var(--ink);color:white;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{position:relative}
+.card-img{height:390px;background:linear-gradient(145deg,#eee4d7,#c7b9a8);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card:nth-child(2) .card-img{background:linear-gradient(145deg,#e9ddd1,#bca58f)}
+.card:nth-child(3) .card-img{background:linear-gradient(145deg,#eee8dd,#d0c1ad)}
+.card:nth-child(4) .card-img{background:linear-gradient(145deg,#e3e1d9,#aaa99f)}
+.bottle{width:108px;height:205px;background:linear-gradient(90deg,#ddd,#fff 45%,#c9c9c9);border-radius:10px 10px 17px 17px;box-shadow:12px 18px 25px rgba(0,0,0,.18);position:relative}
+.bottle:before{content:"";position:absolute;top:-34px;left:31px;width:46px;height:35px;background:#25221f;border-radius:4px 4px 1px 1px}
+.bottle:after{content:"AURELIA";position:absolute;top:78px;left:12px;width:84px;text-align:center;font:8px Arial;letter-spacing:2px}
+.card:nth-child(2) .bottle{background:linear-gradient(90deg,#d7bfa9,#f6e5d3 50%,#bd9c7f)}
+.card:nth-child(3) .bottle{background:linear-gradient(90deg,#d9d5ca,#faf8f0 50%,#bdb8ab)}
+.card:nth-child(4) .bottle{background:linear-gradient(90deg,#c2c0ba,#e8e6df 50%,#999890)}
+.wishlist{position:absolute;right:13px;top:13px;border:0;border-radius:50%;width:34px;height:34px;background:rgba(255,255,255,.85);font-size:17px}
+.card-info{padding:16px 2px 5px}
+.card-info h3{font-size:19px;font-weight:400}
+.origin{font:10px Arial,sans-serif;letter-spacing:1.2px;color:var(--muted);text-transform:uppercase;margin:7px 0}
+.price{font:13px Arial,sans-serif}
+.add{width:100%;margin-top:13px;padding:12px;border:1px solid var(--ink);background:transparent;font:10px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase}
+.add:hover{background:var(--ink);color:white}
+.story{background:var(--cream)}
+.story-grid{max-width:1240px;margin:auto;padding:90px 28px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.story-img{height:520px;background:url("https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=85") center/cover}
+.story h2{font-size:48px;font-weight:400;line-height:1.05}
+.story p{font:15px/1.8 Arial,sans-serif;color:var(--muted);margin:24px 0}
+.textlink{font:11px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--ink)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.feature{padding:35px 20px;text-align:center;border-right:1px solid var(--line)}
+.feature:last-child{border:0}.feature b{display:block;font-size:18px;font-weight:400;margin-bottom:9px}.feature span{font:11px/1.6 Arial,sans-serif;color:var(--muted)}
+.newsletter{background:var(--dark);color:white;text-align:center;padding:80px 20px}
+.newsletter h2{font-size:42px;font-weight:400}.newsletter p{font:13px Arial,sans-serif;color:#cfc7bd;margin:15px auto 25px}
+.form{display:flex;max-width:450px;margin:auto;border-bottom:1px solid #aaa}
+.form input{flex:1;background:transparent;border:0;padding:14px;color:white;outline:0}.form button{background:none;border:0;color:white;font:10px Arial,sans-serif;letter-spacing:1.5px}
+footer{background:#171411;color:#bdb5ac;padding:50px 28px}
+.footer-grid{max-width:1240px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:35px}
+footer h3{color:white;font-size:20px;font-weight:400;letter-spacing:3px;margin-bottom:18px}
+footer h4{color:white;font:10px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+footer a,footer p{display:block;color:#bdb5ac;text-decoration:none;font:12px/2 Arial,sans-serif}
+.cart{position:fixed;right:20px;bottom:20px;background:var(--ink);color:white;border:0;padding:15px 20px;font:11px Arial,sans-serif;letter-spacing:1.5px;z-index:30;box-shadow:0 8px 25px #0003}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#211d19;color:white;padding:13px 20px;font:11px Arial,sans-serif;opacity:0;pointer-events:none;transition:.3s;z-index:50}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){
+ .navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}.story-grid{grid-template-columns:1fr;gap:35px}.story-img{height:380px}.footer-grid{grid-template-columns:1fr 1fr}.features{grid-template-columns:1fr}.feature{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.card-img{height:340px}.hero{min-height:570px}.section h2,.story h2,.newsletter h2{font-size:34px}.footer-grid{grid-template-columns:1fr}.nav{padding:0 18px}}
+</style>
+</head>
+<body>
+<div class="topbar">COMPLIMENTARY SHIPPING ON ORDERS OVER R1,500 • AUTHENTIC EUROPEAN FRAGRANCES</div>
+<header>
+<nav class="nav">
+  <div class="logo">AURELIA</div>
+  <div class="navlinks">
+    <a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#story">Our Story</a><a href="#contact">Contact</a>
+  </div>
+  <div class="icons"><button class="iconbtn" aria-label="Search">⌕</button><button class="iconbtn" aria-label="Cart" onclick="scrollToCart()">♧<span class="badge" id="count">0</span></button></div>
+</nav>
+</header>
+
+<main>
+<section class="hero">
+ <div class="hero-inner">
+  <div class="eyebrow">Curated in Europe • Delivered to South Africa</div>
+  <h1>Wear the scent. Own the moment.</h1>
+  <p>Discover a refined collection of authentic European fragrances, carefully selected for modern women and men who appreciate exceptional perfumery.</p>
+  <a class="cta" href="#shop">Shop fragrances</a>
+ </div>
+</section>
+
+<section class="section" id="shop">
+ <div class="section-head"><div><div class="eyebrow" style="color:var(--muted)">The collection</div><h2>Signature fragrances</h2></div><a href="#shop">View all →</a></div>
+ <div class="filters">
+   <button class="filter active" onclick="filterCards('all',this)">All</button>
+   <button class="filter" onclick="filterCards('women',this)">For her</button>
+   <button class="filter" onclick="filterCards('men',this)">For him</button>
+   <button class="filter" onclick="filterCards('unisex',this)">Unisex</button>
+ </div>
+ <div class="grid" id="productGrid">
+  <article class="card" data-cat="women">
+   <div class="card-img"><button class="wishlist">♡</button><div class="bottle"></div></div>
+   <div class="card-info"><h3>Velours No. 01</h3><div class="origin">Paris, France • Eau de Parfum</div><div class="price">R1,890</div><button class="add" onclick="addToCart('Velours No. 01')">Add to bag</button></div>
+  </article>
+  <article class="card" data-cat="women">
+   <div class="card-img"><button class="wishlist">♡</button><div class="bottle"></div></div>
+   <div class="card-info"><h3>Fleur d'Or</h3><div class="origin">Grasse, France • Eau de Parfum</div><div class="price">R2,150</div><button class="add" onclick="addToCart('Fleur d’Or')">Add to bag</button></div>
+  </article>
+  <article class="card" data-cat="unisex">
+   <div class="card-img"><button class="wishlist">♡</button><div class="bottle"></div></div>
+   <div class="card-info"><h3>Maison Serein</h3><div class="origin">Milan, Italy • Eau de Parfum</div><div class="price">R2,290</div><button class="add" onclick="addToCart('Maison Serein')">Add to bag</button></div>
+  </article>
+  <article class="card" data-cat="men">
+   <div class="card-img"><button class="wishlist">♡</button><div class="bottle"></div></div>
+   <div class="card-info"><h3>Noir Atelier</h3><div class="origin">Berlin, Germany • Parfum</div><div class="price">R2,490</div><button class="add" onclick="addToCart('Noir Atelier')">Add to bag</button></div>
+  </article>
+ </div>
+</section>
+
+<section class="story" id="collections">
+ <div class="story-grid">
+  <div class="story-img"></div>
+  <div><div class="eyebrow" style="color:var(--muted)">European provenance</div><h2>From Europe's fragrance capitals to your vanity.</h2><p>We source from established European fragrance houses and specialist distributors, bringing distinctive scents to South Africa. Every listing should clearly state its origin, concentration and authenticity.</p><a class="textlink" href="#shop">Explore the collection →</a></div>
+ </div>
+</section>
+
+<section class="section" id="story">
+ <div class="features">
+  <div class="feature"><b>Authenticity first</b><span>Original products sourced through reputable European suppliers.</span></div>
+  <div class="feature"><b>Curated selection</b><span>A considered edit rather than an overwhelming catalogue.</span></div>
+  <div class="feature"><b>South African delivery</b><span>Secure nationwide delivery with transparent shipping information.</span></div>
+ </div>
+</section>
+
+<section class="newsletter">
+ <div class="eyebrow">The Aurelia journal</div><h2>Enter the world of fragrance.</h2><p>New arrivals, scent guides and private offers, occasionally.</p>
+ <form class="form" onsubmit="subscribe(event)"><input type="email" placeholder="Your email address" required><button>JOIN</button></form>
+</section>
+</main>
+
+<footer id="contact">
+ <div class="footer-grid">
+  <div><h3>AURELIA</h3><p>European fragrance, thoughtfully curated for South Africa.</p></div>
+  <div><h4>Shop</h4><a href="#shop">Women</a><a href="#shop">Men</a><a href="#shop">Unisex</a><a href="#shop">New arrivals</a></div>
+  <div><h4>Information</h4><a href="#">Shipping & delivery</a><a href="#">Returns</a><a href="#">Authenticity</a><a href="#">FAQ</a></div>
+  <div><h4>Contact</h4><p>hello@aureliafragrance.co.za</p><p>Johannesburg, South Africa</p><a href="#">Instagram</a></div>
+ </div>
+</footer>
+
+<button class="cart" onclick="showCart()">Bag (<span id="bagCount">0</span>)</button>
+<div class="toast" id="toast"></div>
+
+<script>
+let cartCount=0;
+function addToCart(name){
+ cartCount++; document.getElementById('count').textContent=cartCount; document.getElementById('bagCount').textContent=cartCount;
+ const t=document.getElementById('toast'); t.textContent=name+' added to your bag'; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800);
+}
+function filterCards(cat,btn){
+ document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+ document.querySelectorAll('.card').forEach(c=>c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none');
+}
+function showCart(){
+ const t=document.getElementById('toast'); t.textContent=cartCount?`Your bag contains ${cartCount} item${cartCount>1?'s':''}. Checkout can be connected here.`:'Your bag is empty.'; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200);
+}
+function scrollToCart(){showCart()}
+function subscribe(e){e.preventDefault();const t=document.getElementById('toast');t.textContent='Welcome to the Aurelia journal.';t.classList.add('show');e.target.reset();setTimeout(()=>t.classList.remove('show'),2000)}
+</script>
+</body>
+</html>
